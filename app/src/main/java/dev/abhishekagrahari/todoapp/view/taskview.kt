@@ -1,10 +1,11 @@
 package dev.abhishekagrahari.todoapp.view
 
-
-
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 // Data class for Task
 data class Task(val title: String, val description: String)
@@ -29,21 +31,27 @@ fun createNewTask(): List<Task> {
 }
 
 @Composable
-fun TaskListView() {
+fun TaskListView(navController: NavController) {
     // Remember a list of tasks
     val tasks = remember { createNewTask() }
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp) // Space between cards
-    ) {
-        items(tasks) { task ->
-            TaskCard(task = task)
+ // Properly using padding values here
+            Column(modifier = Modifier.padding(16.dp)) {
+                Button(onClick = { navController.navigate("addTask") }) {
+                    Text("Add Task")
+                }
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp), // Adjust padding for the list
+                    verticalArrangement = Arrangement.spacedBy(8.dp) // Space between items
+                ) {
+                    items(tasks) { task ->
+                        TaskCard(task = task)
+                    }
+                }
+            }
         }
-    }
-}
 
 @Composable
 fun TaskCard(task: Task) {
