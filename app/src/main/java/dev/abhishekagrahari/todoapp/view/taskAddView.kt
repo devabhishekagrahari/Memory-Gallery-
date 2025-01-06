@@ -7,12 +7,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.AndroidViewModel
 import androidx.navigation.NavController
+import dev.abhishekagrahari.todoapp.model.todo
+import dev.abhishekagrahari.todoapp.viewModel.taskViewModel
 
 @Composable
-fun addTaskView(navController: NavController) {
-       var firstField by remember { mutableStateOf("") }
-       var secondField by remember { mutableStateOf("") }
+fun addTaskView(navController: NavController,
+                viewModel: taskViewModel
+) {
+       var taskTitle by remember { mutableStateOf("") }
+       var taskDescription by remember { mutableStateOf("") }
 
        Column(
            modifier = Modifier
@@ -23,8 +28,8 @@ fun addTaskView(navController: NavController) {
        ) {
            // First text field
            OutlinedTextField(
-               value = firstField,
-               onValueChange = { firstField = it },
+               value = taskTitle,
+               onValueChange = { taskTitle = it },
                label = { Text("Task Title") },
                modifier = Modifier
                    .fillMaxWidth()
@@ -34,8 +39,8 @@ fun addTaskView(navController: NavController) {
 
            // Second text field
            OutlinedTextField(
-               value = secondField,
-               onValueChange = { secondField = it },
+               value = taskDescription,
+               onValueChange = { taskDescription = it },
                label = { Text("Task Description") },
                modifier = Modifier
                    .fillMaxWidth()
@@ -46,10 +51,11 @@ fun addTaskView(navController: NavController) {
            // Submit button
            Button(
                onClick = {
-                   if (firstField.isNotBlank() && secondField.isNotBlank()) {
+                   if (taskTitle.isNotBlank() && taskDescription.isNotBlank()) {
                        // pass a function to add the elements
-                       firstField = "" // Clear the fields after submit
-                       secondField = ""
+                       viewModel.addUser(taskName= taskTitle , taskDescription = taskDescription)
+                       taskTitle = "" // Clear the fields after submit
+                       taskDescription = ""
                    }
                    navController.navigate("home")
                },

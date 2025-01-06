@@ -15,11 +15,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import dev.abhishekagrahari.todoapp.viewModel.SetupNavGraph
+import dev.abhishekagrahari.todoapp.viewModel.taskViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenView(navController: NavController) {
+fun HomeScreenView(navController: NavController , viewModel: taskViewModel) {
     /*   val drawerState = rememberDrawerState(DrawerValue.Closed) // Drawer state
     val scope = rememberCoroutineScope() // Coroutine scope for toggling the drawer
 
@@ -134,7 +135,7 @@ fun HomeScreenView(navController: NavController) {
                 .padding(paddingValues),
             contentAlignment = Alignment.Center
         ) {
-            TaskListView(navController)
+            TaskListView(navController , viewModel)
         }
 
     }

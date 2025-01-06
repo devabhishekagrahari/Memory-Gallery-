@@ -10,19 +10,19 @@ import dev.abhishekagrahari.todoapp.view.TaskListView
 import dev.abhishekagrahari.todoapp.view.addTaskView
 
 @Composable
-fun SetupNavGraph(navController: NavHostController) {
+fun SetupNavGraph(navController: NavHostController , viewModel: taskViewModel) {
     NavHost(
         navController = navController,
         startDestination = "home"
     ) {
         composable("home"){
-            HomeScreenView(navController)
+            HomeScreenView(navController , viewModel)
         }
         composable("taskView") {
-            TaskListView(navController)
+            TaskListView(navController , viewModel)
         }
         composable("addTask") {
-            addTaskView(navController)
+            addTaskView(navController , viewModel)
         }
     }
 }
