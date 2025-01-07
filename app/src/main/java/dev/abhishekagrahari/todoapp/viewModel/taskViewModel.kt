@@ -21,9 +21,9 @@ class taskViewModel(private val repository: taskRepository) : ViewModel() {
         }
     }
 
-    fun deleteAllUsers() {
+    fun deleteSelectedTask(id :Int) {
         viewModelScope.launch {
-            //userDao.deleteAllUsers()
+            repository.deleteSelectedTask(id)
         }
     }
 }

@@ -13,6 +13,6 @@ interface dao {
     @Query("SELECT * FROM task_table")
     fun getAllUsers(): Flow<List<todo>>
 
-   /* @Query("DELETE FROM task_table")
-    suspend fun deleteAllUsers()*/
+    @Query("DELETE  FROM task_table where id=:id")
+    suspend fun deleteSelectedTask(id: Int)
 }

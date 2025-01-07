@@ -58,14 +58,14 @@ fun TaskListView(navController: NavController, taskViewModel: taskViewModel) {
                     verticalArrangement = Arrangement.spacedBy(8.dp) // Space between items
                 ) {
                     items(tasks) { task ->
-                        TaskCard(task = task)
+                        TaskCard(task = task , taskViewModel)
                     }
                 }
             }
         }
 
 @Composable
-fun TaskCard(task: todo) {
+fun TaskCard(task: todo , taskViewModel: taskViewModel) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -82,6 +82,12 @@ fun TaskCard(task: todo) {
                 .padding(16.dp)
         ) {
             Text(
+                text = task.id.toString(),
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Text(
                 text = task.taskName,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
@@ -93,6 +99,9 @@ fun TaskCard(task: todo) {
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
+            Button(onClick = {taskViewModel.deleteSelectedTask(task.id) }){
+                Text("Delete Task")
+            }
         }
     }
 }
