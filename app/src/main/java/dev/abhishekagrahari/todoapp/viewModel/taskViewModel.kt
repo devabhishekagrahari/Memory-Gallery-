@@ -18,7 +18,7 @@ class taskViewModel(private val repository: taskRepository) : ViewModel() {
     fun addUser(taskName: String  , taskDescription : String , image: Bitmap) {
         viewModelScope.launch {
             repository.addItem(todo(taskName = taskName , taskDescription = taskDescription ,
-                image= bitmapToByteArray(image)))
+                image= degradeBitmapToUnderSize(image)))
         }
     }
 
@@ -26,6 +26,33 @@ class taskViewModel(private val repository: taskRepository) : ViewModel() {
         viewModelScope.launch {
             repository.deleteSelectedTask(id)
         }
+    }
+    fun degradeBitmapToUnderSize(bitmap: Bitmap, targetSizeInBytes: Int = 1_500_000): ByteArray {
+        var compressionQuality = 100
+        var resizedBitmap = bitmap
+        val baos = ByteArrayOutputStream()
+
+        // Step 1: Resize the Bitmap (if needed)
+        if (bitmap.byteCount > targetSizeInBytes) {
+            val width = bitmap.width
+            val height = bitmap.height
+            val scalingFactor = Math.sqrt(targetSizeInBytes.toDouble() / bitmap.byteCount).toFloat()
+            resizedBitmap = Bitmap.createScaledBitmap(
+                bitmap,
+                (width * scalingFactor).toInt(),
+                (height * scalingFactor).toInt(),
+                true
+            )
+        }
+
+        // Step 2: Compress the Bitmap
+        do {
+            baos.reset()
+            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, compressionQuality, baos)
+            compressionQuality -= 5 // Reduce quality by 5% in each iteration
+        } while (baos.size() > targetSizeInBytes && compressionQuality > 10)
+
+        return baos.toByteArray()
     }
 
 
