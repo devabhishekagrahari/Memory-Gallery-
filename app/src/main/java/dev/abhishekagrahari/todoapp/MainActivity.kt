@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TodoAppTheme {
-                val viewModel = ViewModelProvider(
+            val viewModel = ViewModelProvider(
                     this,
                     taskViewModelFactory(applicationContext)
                 ).get(taskViewModel::class.java)

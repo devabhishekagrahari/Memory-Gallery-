@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "707910186672",
+    "project_id": "memory-gallery-884a1",
+    "storage_bucket": "memory-gallery-884a1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707910186672:android:48baa82523df2a63e9ed75",
+        "android_client_info": {
+          "package_name": "dev.abhishekagrahari.todoapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT80ef6gVNeIwaHPAe1mN80pKEBYMcsUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

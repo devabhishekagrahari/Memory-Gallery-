@@ -1,8 +1,8 @@
 package dev.abhishekagrahari.todoapp.view
 
-import android.graphics.Bitmap
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -12,7 +12,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -23,8 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import dev.abhishekagrahari.todoapp.viewModel.taskViewModel
+import androidx.compose.material3.TextFieldDefaults
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun addTaskView(
     navController: NavController,
@@ -69,9 +68,9 @@ fun addTaskView(
             value = taskTitle,
             onValueChange = { taskTitle = it },
             label = { Text("Title of Your Memory") },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Color(0xFFB61C58),
-                unfocusedBorderColor = Color(0xFFD81B60)
+            colors = TextFieldDefaults.colors(
+                focusedTextColor = Color(0xFFB61C58),
+                unfocusedTextColor = Color(0xFFD81B60)
             ),
             modifier = Modifier
                 .fillMaxWidth()
@@ -84,9 +83,9 @@ fun addTaskView(
             value = taskDescription,
             onValueChange = { taskDescription = it },
             label = { Text("Describe the Memory") },
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Color(0xFFB61C58),
-                unfocusedBorderColor = Color(0xFFD81B60)
+            colors = TextFieldDefaults.colors(
+                focusedTextColor = Color(0xFFB61C58),
+                unfocusedTextColor = Color(0xFFD81B60)
             ),
             modifier = Modifier
                 .fillMaxWidth()
