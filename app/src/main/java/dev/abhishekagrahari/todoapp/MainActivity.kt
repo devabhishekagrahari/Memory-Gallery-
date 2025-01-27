@@ -4,16 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import dev.abhishekagrahari.todoapp.ui.theme.TodoAppTheme
-
 import dev.abhishekagrahari.todoapp.view.HomeScreenView
+
+
+import dev.abhishekagrahari.todoapp.viewModel.SetupNavGraph
+import dev.abhishekagrahari.todoapp.viewModel.taskViewModel
+import dev.abhishekagrahari.todoapp.viewModel.taskViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TodoAppTheme {
-                   HomeScreenView()
+                val viewModel = ViewModelProvider(
+                    this,
+                    taskViewModelFactory(applicationContext)
+                ).get(taskViewModel::class.java)
+                  SetupNavGraph(navController = rememberNavController() , viewModel = viewModel)
             }
         }
     }

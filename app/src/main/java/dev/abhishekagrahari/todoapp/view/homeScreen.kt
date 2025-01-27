@@ -11,14 +11,17 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import dev.abhishekagrahari.todoapp.viewModel.SetupNavGraph
+import dev.abhishekagrahari.todoapp.viewModel.taskViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenView() {
-    val drawerState = rememberDrawerState(DrawerValue.Closed) // Drawer state
+fun HomeScreenView(navController: NavController , viewModel: taskViewModel) {
+    /*   val drawerState = rememberDrawerState(DrawerValue.Closed) // Drawer state
     val scope = rememberCoroutineScope() // Coroutine scope for toggling the drawer
 
     ModalNavigationDrawer(
@@ -101,8 +104,8 @@ fun HomeScreenView() {
                     }
                 },
                 floatingActionButton = {
-                    FloatingActionButton(onClick = { /* Handle FAB click */ }) {
-                        Text("+")
+                    FloatingActionButton(onClick = { navController.navigate("addTask") }) {
+                        Text("Add Task +")
                     }
                 },
                 content = { paddingValues ->
@@ -113,8 +116,7 @@ fun HomeScreenView() {
                             .padding(paddingValues),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text("Hello, Scaffold!", style = MaterialTheme.typography.bodyLarge)
-                        TaskListView()
+                        TaskListView(navController)
                     }
 
                 }
@@ -122,9 +124,19 @@ fun HomeScreenView() {
         }
     )
 }
+*/
+    BaseLayout(
+        title = "homeScreen",
+        navController = navController
+    ) { paddingValues ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+            contentAlignment = Alignment.Center
+        ) {
+            TaskListView(navController , viewModel)
+        }
 
-@Preview(showBackground = true)
-@Composable
-fun MyApp() {
-    HomeScreenView()
+    }
 }
