@@ -1,6 +1,8 @@
 package dev.abhishekagrahari.todoapp.view
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -8,9 +10,9 @@ import androidx.navigation.NavController
 import dev.abhishekagrahari.todoapp.viewModel.taskViewModel
 
 @Composable
-fun HomeScreenView(navController: NavController , viewModel: taskViewModel) {
+fun addScreenView(navController: NavController, viewModel: taskViewModel) {
     BaseLayout(
-        title = "Memory Gallery",
+        title = "Add Screen View",
         navController = navController
     ) { paddingValues ->
         Box(
@@ -19,7 +21,7 @@ fun HomeScreenView(navController: NavController , viewModel: taskViewModel) {
                 .padding(paddingValues),
             contentAlignment = Alignment.Center
         ) {
-            TaskListView(navController , viewModel)
+            addTaskView(navController , viewModel)
         }
 
     }

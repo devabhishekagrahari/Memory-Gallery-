@@ -8,5 +8,6 @@ data class todo(
     @PrimaryKey(autoGenerate = true)
     var id :Int =0,
     var taskName: String ="",
-    var taskDescription: String =""
+    var taskDescription: String ="" ,
+    var image: ByteArray ,
 )
